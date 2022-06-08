@@ -1,4 +1,5 @@
 import React,  { useState } from "react";
+import axios from "axios";
 import "./MovieRow.css";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -31,8 +32,12 @@ export default ({title,items}) => {
 
     }
 
-    const addItemHandler = (info) => {
-        alert("title:" + (info.original_name || info.original_title));
+    const addItemHandler = async (info) => {
+       // alert("title:" + (info.original_name || info.original_title));
+        await axios.post(`localhost:5000/movieinfo`,{
+            title: (info.original_name || info.original_title),
+            overview: (info.overview || "empty")
+        });
         console.log(info);
      
     }
