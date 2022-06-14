@@ -3,6 +3,7 @@ import axios from "axios";
 import "./MovieRow.css";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { CopyrightRounded } from "@material-ui/icons";
 
 export default ({title,items}) => {
 
@@ -34,10 +35,16 @@ export default ({title,items}) => {
 
     const addItemHandler = async (info) => {
        // alert("title:" + (info.original_name || info.original_title));
-        await axios.post(`localhost:5000/movieinfo`,{
+        await axios.post(`http://localhost:5000/movieinfo`,{
             title: (info.original_name || info.original_title),
             overview: (info.overview || "empty")
         });
+
+         //let resp = await axios.get(`http://localhost:5000/movieinfo`);
+         //console.log(resp.data);
+        
+    
+        
         console.log(info);
      
     }
