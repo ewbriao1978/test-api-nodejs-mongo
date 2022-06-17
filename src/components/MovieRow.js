@@ -3,7 +3,8 @@ import axios from "axios";
 import "./MovieRow.css";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { CopyrightRounded } from "@material-ui/icons";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default ({title,items}) => {
 
@@ -35,24 +36,26 @@ export default ({title,items}) => {
 
     const addItemHandler = async (info) => {
        // alert("title:" + (info.original_name || info.original_title));
-        await axios.post(`http://localhost:5000/movieinfo`,{
+        let resp = await axios.post(`http://localhost:5000/movieinfo`,{
             title: (info.original_name || info.original_title),
             overview: (info.overview || "empty")
         });
+        console.log("data:");
 
-         //let resp = await axios.get(`http://localhost:5000/movieinfo`);
-         //console.log(resp.data);
-        
-    
-        
+         console.log(resp.data);
+         if (resp.data) toast.success("Movie info saved successfully");
+       
         console.log(info);
      
     }
 
 
     return (
+        
         <div className="movieRow">
             <h2>{title}</h2>
+            <ToastContainer autoClose={800}/>
+
 
             <div className="movieRow--left" onClick={handleLeftArrow}>
                 <NavigateBeforeIcon style={{fontSize: 50}} />
