@@ -10,7 +10,8 @@
 }
 
 .resultRow:hover {
-    background-color: #ffffffaf
+    background-color: #ffffffaf;
+    transition: all ease 0.5s
 
 }
 

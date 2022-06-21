@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React,  { useState } from "react";
 import axios from "axios";
 import "./MovieRow.css";
@@ -40,12 +41,9 @@ export default ({title,items}) => {
             title: (info.original_name || info.original_title),
             overview: (info.overview || "empty")
         });
-        console.log("data:");
 
-         console.log(resp.data);
          if (resp.data) toast.success("Movie info saved successfully");
        
-        console.log(info);
      
     }
 
@@ -81,7 +79,7 @@ export default ({title,items}) => {
 
                     <div key={key} className="movieRow--item" onClick={() => addItemHandler(item)}>
 
-                       <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
+                       <img alt={item.original_title} src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                        
                     </div>
 
