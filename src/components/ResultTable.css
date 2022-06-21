@@ -1,0 +1,23 @@
+.resultRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white;
+    border-radius:10px;
+    padding:0.3rem;
+    margin: 1rem 30rem;
+    background-color: #5a5757ed;
+}
+
+.resultRow:hover {
+    background-color: #ffffffaf
+
+}
+
+.resultRow p {
+    margin-left: 1rem;
+}
+
+.classResult h1{
+    text-align: center;
+}

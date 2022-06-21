@@ -45,7 +45,7 @@ export default() => {
 
   return(
     <div className="page">
-      <ResultTable favorite={favoriteMovies} />
+      <ResultTable favorites={favoriteMovies} />
        
        <section className="lists">
          {movieList.map((item, key) => (
