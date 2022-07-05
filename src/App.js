@@ -33,7 +33,7 @@ export default() => {
 
 
   const addItemHandler = async (info) => {
-     alert("title:" + (info.original_name || info.original_title));
+    // alert("title:" + (info.original_name || info.original_title));
      let resp = await axios.post(`http://localhost:5000/movieinfo`,{
          title: (info.original_name || info.original_title),
          overview: (info.overview || "empty")
