@@ -1,13 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React,  { useState } from "react";
-import axios from "axios";
 import "./MovieRow.css";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-export default ({title,items}) => {
+
+
+export default (props) => {
 
     const [scrollX,setScrollX] = useState(0);
     const [info, setInfo] = useState(null);
@@ -27,7 +26,7 @@ export default ({title,items}) => {
     const handleRightArrow = () => {
 
         let x = scrollX - Math.round(window.innerWidth /2);
-        let listW = items.results.length * 150;
+        let listW = props.items.results.length * 150;
         if ((window.innerWidth - listW) > x){
             x = (window.innerWidth - listW) - 60;
         }
@@ -35,24 +34,15 @@ export default ({title,items}) => {
 
     }
 
-    const addItemHandler = async (info) => {
-       // alert("title:" + (info.original_name || info.original_title));
-        let resp = await axios.post(`http://localhost:5000/movieinfo`,{
-            title: (info.original_name || info.original_title),
-            overview: (info.overview || "empty")
-        });
+  const onAddItemHandler = (e,item) => {
+    props.onAddItemHandler(item);
 
-         if (resp.data) toast.success("Movie info saved successfully");
-       
-     
-    }
-
+  }
 
     return (
         
         <div className="movieRow">
-            <h2>{title}</h2>
-            <ToastContainer autoClose={800}/>
+            <h2>{props.title}</h2>
 
 
             <div className="movieRow--left" onClick={handleLeftArrow}>
@@ -71,13 +61,13 @@ export default ({title,items}) => {
                 <div className="movieRow--list" style={{
 
                     marginLeft: scrollX,
-                    width: items.results.length * 150
+                    width: props.items.results.length * 150
                 
                 
                 }}>
-                {items.results.length > 0 && items.results.map((item, key)=>(
+                {props.items.results.length > 0 && props.items.results.map((item, key)=>(
 
-                    <div key={key} className="movieRow--item" onClick={() => addItemHandler(item)}>
+                    <div key={key} className="movieRow--item" onClick={((e) => onAddItemHandler(e,item))} >
 
                        <img alt={item.original_title} src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                        
