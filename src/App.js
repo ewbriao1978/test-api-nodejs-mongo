@@ -20,12 +20,10 @@ export default() => {
 
 
   const loadAllFavoriteMovies = async() => {
-    console.log("entered");
     let listFavoritMovies = await Model.getFavoriteMovies();
-    console.log("get all data");
     setFavoriteMovies(listFavoritMovies);
-    console.log("data");
-    console.log(listFavoritMovies);
+    //console.log("data");
+    //console.log(listFavoritMovies);
     
   }
 
@@ -43,11 +41,14 @@ export default() => {
         loadAllFavoriteMovies();
         toast.success("Movie info saved successfully");
       }
-    
   
  }
 
 
+
+ const deleteHandler = async (info) => {
+  alert("removeu: " + info);
+ }
 
   useEffect(() => {
     loadAllFavoriteMovies();
@@ -71,7 +72,7 @@ export default() => {
     <div className="page">
       <ToastContainer autoClose={800}/>
 
-      <ResultTable favorites={favoriteMovies} />
+      <ResultTable favorites={favoriteMovies} onDeleteHandler={deleteHandler}/>
        
        <section className="lists">
          {movieList.map((item, key) => (
