@@ -19,6 +19,19 @@ export default() => {
 
 
 
+  const loadAllFavoriteMovies = async() => {
+    console.log("entered");
+    let listFavoritMovies = await Model.getFavoriteMovies();
+    console.log("get all data");
+    setFavoriteMovies(listFavoritMovies);
+    console.log("data");
+    console.log(listFavoritMovies);
+    
+  }
+
+
+
+
   const addItemHandler = async (info) => {
      alert("title:" + (info.original_name || info.original_title));
      let resp = await axios.post(`http://localhost:5000/movieinfo`,{
@@ -26,7 +39,10 @@ export default() => {
          overview: (info.overview || "empty")
      });
 
-      if (resp.data) toast.success("Movie info saved successfully");
+      if (resp.data) {
+        loadAllFavoriteMovies();
+        toast.success("Movie info saved successfully");
+      }
     
   
  }
@@ -34,15 +50,6 @@ export default() => {
 
 
   useEffect(() => {
-    const loadAllFavoriteMovies = async() => {
-      console.log("entered");
-      let listFavoritMovies = await Model.getFavoriteMovies();
-      console.log("get all data");
-      setFavoriteMovies(listFavoritMovies);
-      console.log("data");
-      console.log(listFavoritMovies);
-      
-    }
     loadAllFavoriteMovies();
 
     const loadAll = async () => {
