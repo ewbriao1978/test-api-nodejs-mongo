@@ -22,8 +22,8 @@ export default() => {
   const loadAllFavoriteMovies = async() => {
     let listFavoritMovies = await Model.getFavoriteMovies();
     setFavoriteMovies(listFavoritMovies);
-    //console.log("data");
-    //console.log(listFavoritMovies);
+    console.log("data");
+    console.log(listFavoritMovies);
     
   }
 
@@ -47,7 +47,16 @@ export default() => {
 
 
  const deleteHandler = async (info) => {
-  alert("removeu: " + info);
+  const url = `http://localhost:5000/movieinfo/${info._id}`;
+
+  await axios.delete(url)
+    .then(response => {
+      loadAllFavoriteMovies();
+      toast.success("Movie info removed successfully");
+    })
+    .catch(error => {
+        console.error('There was an error!', error);
+    });
  }
 
   useEffect(() => {

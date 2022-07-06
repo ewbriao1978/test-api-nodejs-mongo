@@ -25,7 +25,7 @@ export default (props) => {
                 return(
                     <div key={key} className="resultRow">
                         <p key={key}> {item.title} </p>
-                        <div key={key} className="trashIcon" onClick={((e) => deleteItemHandler(e,item.title))}>
+                        <div key={key} className="trashIcon" onClick={((e) => deleteItemHandler(e,item))}>
                          
                             <DeleteIcon style={{fontSize: 30}} />
                          
