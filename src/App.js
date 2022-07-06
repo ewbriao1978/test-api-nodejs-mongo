@@ -52,7 +52,7 @@ export default() => {
   await axios.delete(url)
     .then(response => {
       loadAllFavoriteMovies();
-      toast.success("Movie info removed successfully");
+      toast.info("Movie info REMOVED successfully");
     })
     .catch(error => {
         console.error('There was an error!', error);
